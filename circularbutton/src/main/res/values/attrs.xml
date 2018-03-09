@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="CircularView">
+        <attr name="gradient_start" format="color" />
+        <attr name="gradient_end" format="color" />
+        <attr name="fg_icon" format="reference" />
+    </declare-styleable>
+</resources>
