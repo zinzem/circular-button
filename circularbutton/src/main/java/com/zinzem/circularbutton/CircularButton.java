@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
@@ -67,7 +68,10 @@ public class CircularButton extends View {
                     mGradientStartColor,
                     mGradientEndColor,
                     Shader.TileMode.MIRROR));
-            mIconDestinationRect = new Rect(getPaddingLeft(), getPaddingTop(), width - getPaddingRight(), height - getPaddingBottom());
+
+            int left = (width / 2) - (mIcon.getWidth() / 2);
+            int top = (height / 2) - (mIcon.getHeight() / 2);
+            mIconDestinationRect = new Rect(left, top, left + mIcon.getWidth(), top + mIcon.getHeight());
         }
 
         canvas.drawCircle(width / 2, height / 2, height / 2, mBackgroundPaint);
