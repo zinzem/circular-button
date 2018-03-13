@@ -68,7 +68,9 @@ public class CircularButton extends View {
                     mGradientStartColor,
                     mGradientEndColor,
                     Shader.TileMode.MIRROR));
+        }
 
+        if (mIcon != null && mIconDestinationRect == null) {
             int left = (width / 2) - (mIcon.getWidth() / 2);
             int top = (height / 2) - (mIcon.getHeight() / 2);
             mIconDestinationRect = new Rect(left, top, left + mIcon.getWidth(), top + mIcon.getHeight());
