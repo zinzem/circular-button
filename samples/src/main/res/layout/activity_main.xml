@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.samples.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.zinzem.circularbutton.CircularButton
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:elevation="5dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        app:gradient_start="#f857a6"
-        app:gradient_end="#ff5858"
-        app:fg_icon="@drawable/ic_add_white_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+    <data>
+        <variable
+            name="activated"
+            type="boolean"/>
+    </data>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.samples.MainActivity">
+
+        <com.zinzem.circularbutton.CircularButton
+            android:id="@+id/circular_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:elevation="5dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            app:cb_gradient_start="@{ activated ? @color/pink : @color/orange}"
+            app:cb_gradient_end="@{ !activated ? @color/pink : @color/orange}"
+            app:cb_icon="@drawable/ic_add_white_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

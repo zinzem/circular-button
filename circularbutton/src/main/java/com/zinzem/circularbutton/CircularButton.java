@@ -1,20 +1,20 @@
 package com.zinzem.circularbutton;
 
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
-import android.graphics.Outline;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 
 import static com.zinzem.circularbutton.utils.RessourceUtils.getBitmap;
 
@@ -23,26 +23,29 @@ public class CircularButton extends View {
     private Paint mBackgroundPaint;
     private int mGradientStartColor = Color.WHITE;
     private int mGradientEndColor = Color.WHITE;
-    private Paint mIconPaint;
     private Bitmap mIcon;
+    private Paint mIconPaint;
+    private Rect mIconSourceRect;
+    private Rect mIconDestinationRect;
 
     private Context mContext;
 
     public CircularButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         int iconResId = -1;
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CircularView, 0, 0);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CircularButton, 0, 0);
         try {
-            mGradientStartColor = typedArray.getInt(R.styleable.CircularView_gradient_start, mGradientStartColor);
-            mGradientEndColor = typedArray.getInt(R.styleable.CircularView_gradient_end, mGradientEndColor);
-            iconResId = typedArray.getResourceId(R.styleable.CircularView_fg_icon, iconResId);
+            mGradientStartColor = typedArray.getInt(R.styleable.CircularButton_cb_gradient_start, mGradientStartColor);
+            mGradientEndColor = typedArray.getInt(R.styleable.CircularButton_cb_gradient_end, mGradientEndColor);
+            iconResId = typedArray.getResourceId(R.styleable.CircularButton_cb_icon, iconResId);
         } finally {
             typedArray.recycle();
         }
 
         if (iconResId != -1) {
-            mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             mIcon = getBitmap(context, iconResId);
+            mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
         }
 
         mContext = context;
@@ -64,12 +67,13 @@ public class CircularButton extends View {
                     mGradientStartColor,
                     mGradientEndColor,
                     Shader.TileMode.MIRROR));
+            mIconDestinationRect = new Rect(getPaddingLeft(), getPaddingTop(), width - getPaddingRight(), height - getPaddingBottom());
         }
 
         canvas.drawCircle(width / 2, height / 2, height / 2, mBackgroundPaint);
 
         if (mIcon != null) {
-            canvas.drawBitmap(mIcon, (width - mIcon.getWidth()) / 2, (height - mIcon.getHeight()) / 2, mIconPaint);
+            canvas.drawBitmap(mIcon, mIconSourceRect, mIconDestinationRect, mIconPaint);
         }
     }
 
@@ -83,7 +87,6 @@ public class CircularButton extends View {
     public void setIcon(int resId) {
         setIcon(resId, null);
     }
-
     public void setIcon(int resId, ValueAnimator valueAnimator) {
         mIcon = getBitmap(mContext, resId);
         if (valueAnimator != null) {
@@ -95,6 +98,32 @@ public class CircularButton extends View {
                     invalidate();
                 }
             });
+        } else {
+            invalidate();
         }
+    }
+    public void setCb_gradient_start(int color) {
+        mGradientStartColor = color;
+        mBackgroundPaint = null;
+        invalidate();
+    }
+    public void setCb_gradient_end(int color) {
+        mGradientEndColor = color;
+        mBackgroundPaint = null;
+        invalidate();
+    }
+    public void setCb_icon(Drawable drawable) {
+        mIcon = getBitmap(drawable);
+        invalidate();
+    }
+
+    public Drawable getCb_icon() {
+        return new BitmapDrawable(getResources(), mIcon);
+    }
+    public int getCb_gradient_start(int color) {
+        return mGradientEndColor;
+    }
+    public int getCb_gradient_end(int color) {
+        return mGradientEndColor;
     }
 }
