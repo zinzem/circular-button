@@ -44,7 +44,7 @@ public class CircularButton extends View {
 
         if (iconResId != -1) {
             mIcon = getBitmap(context, iconResId);
-            mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mIconPaint =  new Paint(Paint.ANTI_ALIAS_FLAG);
             mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
         }
 
@@ -94,6 +94,7 @@ public class CircularButton extends View {
     }
     public void setIcon(int resId, ValueAnimator valueAnimator) {
         mIcon = getBitmap(mContext, resId);
+        mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
         mIconDestinationRect = null;
         if (valueAnimator != null) {
@@ -121,6 +122,7 @@ public class CircularButton extends View {
     }
     public void setCb_icon(Drawable drawable) {
         mIcon = getBitmap(drawable);
+        mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
         mIconDestinationRect = null;
         invalidate();
