@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
@@ -95,6 +94,8 @@ public class CircularButton extends View {
     }
     public void setIcon(int resId, ValueAnimator valueAnimator) {
         mIcon = getBitmap(mContext, resId);
+        mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
+        mIconDestinationRect = null;
         if (valueAnimator != null) {
             valueAnimator.start();
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -120,6 +121,8 @@ public class CircularButton extends View {
     }
     public void setCb_icon(Drawable drawable) {
         mIcon = getBitmap(drawable);
+        mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
+        mIconDestinationRect = null;
         invalidate();
     }
 
