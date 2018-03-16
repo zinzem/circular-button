@@ -3,5 +3,9 @@
         <attr name="cb_gradient_start" format="color" />
         <attr name="cb_gradient_end" format="color" />
         <attr name="cb_icon" format="reference" />
+        <attr name="cb_text" format="string" />
+        <attr name="cb_text_color" format="color" />
+        <attr name="cb_text_size" format="dimension" />
+        <attr name="cb_text_style" format="string" />
     </declare-styleable>
 </resources>

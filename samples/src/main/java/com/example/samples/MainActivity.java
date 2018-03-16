@@ -1,9 +1,11 @@
 package com.example.samples;
 
+import android.animation.ValueAnimator;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 
 import com.example.samples.databinding.ActivityMainBinding;
 
@@ -18,6 +20,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 binding.setActivated(!binding.getActivated());
+
+                ValueAnimator valueAnimator = new ValueAnimator();
+                valueAnimator.setIntValues(binding.getActivated() ? 0 : 255, binding.getActivated() ? 255: 0);
+                valueAnimator.setDuration(500);
+                valueAnimator.setInterpolator(new DecelerateInterpolator());
+                binding.circularButton.animateText(valueAnimator);
             }
         });
     }

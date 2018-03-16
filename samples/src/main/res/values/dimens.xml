@@ -1,0 +1,4 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- IMAGE -->
+    <dimen name="imageXXL">34sp</dimen></resources>
