@@ -62,7 +62,7 @@ public class CircularButton extends View {
 
         // init paints
         mIconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint = new TextPaint();
+        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(textColor);
         mTextPaint.setTextSize(textSize);
         mTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -90,6 +90,7 @@ public class CircularButton extends View {
 
         if (mBackgroundPaint == null) {
             mBackgroundPaint = new Paint();
+            mBackgroundPaint.setAntiAlias(true);
             mBackgroundPaint.setStyle(Paint.Style.FILL);
             mBackgroundPaint.setShader(new LinearGradient(0,
                     0,
