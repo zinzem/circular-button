@@ -106,7 +106,7 @@ public class CircularButton extends View {
             mIconDestinationRect = new Rect(left, top, left + mIcon.getWidth(), top + mIcon.getHeight());
         }
 
-        if (mTextX == -1 && mTextY == -1) {
+        if (mText != null && mTextX == -1 && mTextY == -1) {
             Rect r = new Rect();
             canvas.getClipBounds(r);
             int cHeight = r.height();
