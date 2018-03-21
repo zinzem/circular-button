@@ -9,11 +9,13 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 
 public class RessourceUtils {
 
+    @NonNull
     public static Bitmap getBitmap(Context context, @DrawableRes int drawableResId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableResId);
         if (drawable instanceof BitmapDrawable) {
@@ -27,6 +29,7 @@ public class RessourceUtils {
         }
     }
 
+    @NonNull
     public static Bitmap getBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
@@ -39,6 +42,7 @@ public class RessourceUtils {
         }
     }
 
+    @NonNull
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
@@ -49,6 +53,7 @@ public class RessourceUtils {
         return bitmap;
     }
 
+    @NonNull
     private static Bitmap getBitmap(VectorDrawableCompat vectorDrawable) {
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
                 vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);

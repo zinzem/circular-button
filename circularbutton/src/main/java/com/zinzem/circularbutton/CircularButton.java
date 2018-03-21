@@ -160,28 +160,34 @@ public class CircularButton extends View {
         mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
         mIconDestinationRect = null;
         if (valueAnimator != null) {
-            valueAnimator.start();
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    mIconPaint.setAlpha((int) valueAnimator.getAnimatedValue());
-                    invalidate();
-                }
-            });
+                valueAnimator.start();
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        setIconAlpha((int) valueAnimator.getAnimatedValue());
+                    }
+                });
         } else {
             invalidate();
         }
     }
-    public void animateIcon(ValueAnimator valueAnimator) {
-        mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
-        mIconDestinationRect = null;
-        if (valueAnimator != null) {
+    /**
+     * Set the alpha value of the icon
+     * @param alpha [0 - 255]
+     */
+    public void setIconAlpha(int alpha) {
+        mIconPaint.setAlpha(alpha);
+        invalidate();
+    }
+    public void animateIconAlpha(ValueAnimator valueAnimator) {
+        if (mIcon != null && valueAnimator != null) {
+            mIconSourceRect = new Rect(0, 0, mIcon.getWidth(), mIcon.getHeight());
+            mIconDestinationRect = null;
             valueAnimator.start();
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    mIconPaint.setAlpha((int) valueAnimator.getAnimatedValue());
-                    invalidate();
+                    setIconAlpha((int) valueAnimator.getAnimatedValue());
                 }
             });
         } else {
@@ -198,18 +204,24 @@ public class CircularButton extends View {
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    mTextPaint.setAlpha((int) valueAnimator.getAnimatedValue());
-                    invalidate();
+                    setTextAlpha((int) valueAnimator.getAnimatedValue());
                 }
             });
         } else {
             invalidate();
         }
     }
-    public void animateText(ValueAnimator valueAnimator) {
+    /**
+     * Set the alpha value of the text
+     * @param alpha [0 - 255]
+     */
+    public void setTextAlpha(int alpha) {
+        mTextPaint.setAlpha(alpha);
+        invalidate();
+    }
+    public void animateTextAlpha(ValueAnimator valueAnimator) {
         setText(mText, valueAnimator);
     }
-
 
     public Drawable getCb_icon() {
         return new BitmapDrawable(getResources(), mIcon);

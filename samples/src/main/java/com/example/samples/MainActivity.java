@@ -19,13 +19,32 @@ public class MainActivity extends AppCompatActivity {
         binding.getRoot().findViewById(R.id.circular_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.setActivated(!binding.getActivated());
 
-                ValueAnimator valueAnimator = new ValueAnimator();
-                valueAnimator.setIntValues(binding.getActivated() ? 0 : 255, binding.getActivated() ? 255: 0);
-                valueAnimator.setDuration(500);
-                valueAnimator.setInterpolator(new DecelerateInterpolator());
-                binding.circularButton.animateText(valueAnimator);
+                if (!binding.getActivated()) {
+                    ValueAnimator valueAnimator = new ValueAnimator();
+                    valueAnimator.setIntValues(255, 0);
+                    valueAnimator.setDuration(500);
+                    valueAnimator.setInterpolator(new DecelerateInterpolator());
+                    binding.circularButton.setIconAlpha(0);
+                    ValueAnimator valueAnimator2 = new ValueAnimator();
+                    valueAnimator2.setIntValues(0, 255);
+                    valueAnimator2.setDuration(500);
+                    valueAnimator2.setInterpolator(new DecelerateInterpolator());
+                    binding.circularButton.setText("lol", valueAnimator2);
+                } else {
+                    ValueAnimator valueAnimator = new ValueAnimator();
+                    valueAnimator.setIntValues(0, 255);
+                    valueAnimator.setDuration(500);
+                    valueAnimator.setInterpolator(new DecelerateInterpolator());
+                    binding.circularButton.setIconAlpha(255);
+                    ValueAnimator valueAnimator2 = new ValueAnimator();
+                    valueAnimator2.setIntValues(255, 0);
+                    valueAnimator2.setDuration(500);
+                    valueAnimator2.setInterpolator(new DecelerateInterpolator());
+                    binding.circularButton.animateTextAlpha(valueAnimator2);
+                }
+
+                binding.setActivated(!binding.getActivated());
             }
         });
     }
