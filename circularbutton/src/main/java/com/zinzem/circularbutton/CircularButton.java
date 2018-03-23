@@ -235,6 +235,9 @@ public class CircularButton extends View {
     public int getIconAlpha() {
         return mIconPaint.getAlpha();
     }
+    public String getText() {
+        return mText;
+    }
     public int getTextAlpha() {
         return mTextPaint.getAlpha();
     }
