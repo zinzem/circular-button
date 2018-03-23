@@ -29,7 +29,7 @@
             app:cb_gradient_end="@{ !activated ? @color/pink : @color/orange}"
             app:cb_text_size="30sp"
             app:cb_text_style="bold"
-            app:cb_icon="@mipmap/ic_launcher"
+            app:cb_icon="@drawable/ic_add_white_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

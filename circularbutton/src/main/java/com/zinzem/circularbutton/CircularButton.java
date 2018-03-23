@@ -232,4 +232,10 @@ public class CircularButton extends View {
     public int getCb_gradient_end(int color) {
         return mGradientEndColor;
     }
+    public int getIconAlpha() {
+        return mIconPaint.getAlpha();
+    }
+    public int getTextAlpha() {
+        return mTextPaint.getAlpha();
+    }
 }
